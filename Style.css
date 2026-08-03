@@ -1,0 +1,55 @@
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+h1{
+    margin-bottom:40px;
+    font-size:32px;
+}
+
+#card{
+    text-align:center;
+}
+
+#kana{
+    font-size:170px;
+    font-weight:bold;
+}
+
+#romaji{
+    font-size:42px;
+    color:#4da6ff;
+    min-height:60px;
+    margin-top:20px;
+}
+
+button{
+    margin-top:40px;
+    padding:18px 36px;
+    font-size:22px;
+    border:none;
+    border-radius:14px;
+    background:#0A84FF;
+    color:white;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+#progress{
+    margin-top:30px;
+    color:#999;
+    font-size:20px;
+}

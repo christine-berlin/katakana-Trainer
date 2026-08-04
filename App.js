@@ -21,7 +21,6 @@ const progressEl = document.getElementById("progress");
 const nextButton = document.getElementById("nextButton");
 const showAllButton = document.getElementById("showAllButton");
 const allKanaEl = document.getElementById("allKana");
-const backButton = document.getElementById("backButton");
 
 function shuffle(array){
     for(let i=array.length-1;i>0;i--){
@@ -60,8 +59,10 @@ function renderAllKana(){
     grid.style.display = 'grid';
     grid.style.gridTemplateRows = 'repeat(5, 80px)';
     grid.style.gridAutoFlow = 'column';
+    grid.style.gridAutoColumns = '80px';
     grid.style.direction = 'rtl';
     grid.style.gap = '10px';
+    grid.style.width = 'max-content';
 
     katakana.forEach(k => {
         const card = document.createElement('div');
@@ -98,10 +99,10 @@ function renderAllKana(){
 
 function goBack(){
     allKanaEl.style.display = 'none';
-    showAllButton.textContent = 'Alle Katakana anzeigen';
     document.getElementById('card').style.display='';
     nextButton.style.display='';
     progressEl.style.display='';
+    showAllButton.style.display='';
 }
 
 let showingAll = false;
@@ -111,12 +112,12 @@ showAllButton.addEventListener('click', () => {
         renderAllKana();
         allKanaEl.style.display = 'flex';
         allKanaEl.style.flexDirection = 'column';
-        allKanaEl.style.alignItems = 'center';
+        allKanaEl.style.alignItems = 'flex-start';
         allKanaEl.style.gap = '20px';
-        showAllButton.textContent = 'Verbergen';
         document.getElementById('card').style.display='none';
         nextButton.style.display='none';
         progressEl.style.display='none';
+        showAllButton.style.display='none';
     } else {
         goBack();
     }
@@ -125,7 +126,7 @@ showAllButton.addEventListener('click', () => {
 document.body.addEventListener("click",function(e){
 
     if(e.target===nextButton) return;
-    if(e.target===backButton) return;
+    if(e.target.id==='backButton') return;
 
     if(current){
         romajiEl.textContent=current[1];

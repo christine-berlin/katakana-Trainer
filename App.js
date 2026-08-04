@@ -7,6 +7,7 @@ const katakana = [
 ["ハ","ha"],["ヒ","hi"],["フ","fu"],["ヘ","he"],["ホ","ho"],
 ["マ","ma"],["ミ","mi"],["ム","mu"],["メ","me"],["モ","mo"],
 ["ヤ","ya"],["ユ","yu"],["ヨ","yo"],
+["",""],
 ["ラ","ra"],["リ","ri"],["ル","ru"],["レ","re"],["ロ","ro"],
 ["ワ","wa"],["ヲ","wo"],["ン","n"]
 ];
@@ -31,6 +32,8 @@ function shuffle(array){
 
 function newRound(){
     remaining=[...katakana];
+    // Filter out empty spaces for training
+    remaining = remaining.filter(k => k[0] !== "");
     shuffle(remaining);
     progress=0;
 }
@@ -48,7 +51,7 @@ function nextKana(){
     kanaEl.textContent=current[0];
     romajiEl.textContent="";
 
-    progressEl.textContent=progress+" / "+katakana.length;
+    progressEl.textContent=progress+" / "+46;
 }
 
 function renderAllKana(){

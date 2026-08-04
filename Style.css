@@ -63,8 +63,8 @@ button:active{
 
 #allKana > div {
     display: grid;
-    grid-template-columns: repeat(5, 80px);
-    grid-auto-flow: column dense;
+    grid-template-rows: repeat(5, 80px);
+    grid-auto-flow: column;
     direction: rtl;
     gap: 10px;
     padding: 20px;

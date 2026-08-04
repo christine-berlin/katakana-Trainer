@@ -20,7 +20,7 @@ It is designed to work on any modern web browser and can be installed on an iPho
 2. A random Katakana character is displayed.
 3. Tap anywhere on the screen to reveal its rōmaji.
 4. Tap **"Next Kana"** to continue.
-5. Use **"Alle Katakana anzeigen"** to view the complete Katakana chart.
+5. Use **"Show all Kana"** to view the complete Katakana chart.
 
 ## Technologies
 

@@ -21,6 +21,7 @@ const progressEl = document.getElementById("progress");
 const nextButton = document.getElementById("nextButton");
 const showAllButton = document.getElementById("showAllButton");
 const allKanaEl = document.getElementById("allKana");
+const backButton = document.getElementById("backButton");
 
 function shuffle(array){
     for(let i=array.length-1;i>0;i--){
@@ -53,27 +54,36 @@ function nextKana(){
 
 function renderAllKana(){
     // Clear previous
-    allKanaEl.innerHTML = '';
+    allKanaEl.innerHTML = '<button id="backButton">Zurück</button>';
 
     const grid = document.createElement('div');
     grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(80px, 1fr))';
-    grid.style.gap = '8px';
+    grid.style.gridTemplateColumns = 'repeat(5, 80px)';
+    grid.style.gridAutoFlow = 'column dense';
+    grid.style.direction = 'rtl';
+    grid.style.gap = '10px';
 
     katakana.forEach(k => {
         const card = document.createElement('div');
-        card.style.border = '1px solid #ccc';
+        card.className = 'kana-card';
+        card.style.border = '1px solid #444';
         card.style.padding = '8px';
         card.style.textAlign = 'center';
         card.style.borderRadius = '4px';
+        card.style.background = '#222';
 
         const kEl = document.createElement('div');
+        kEl.className = 'kana-char';
         kEl.textContent = k[0];
         kEl.style.fontSize = '24px';
+        kEl.style.fontWeight = 'bold';
 
         const rEl = document.createElement('div');
+        rEl.className = 'kana-romaji';
         rEl.textContent = k[1];
         rEl.style.fontSize = '12px';
+        rEl.style.color = '#999';
+        rEl.style.marginTop = '4px';
 
         card.appendChild(kEl);
         card.appendChild(rEl);
@@ -81,6 +91,17 @@ function renderAllKana(){
     });
 
     allKanaEl.appendChild(grid);
+    
+    // Re-attach back button event listener
+    document.getElementById("backButton").addEventListener("click", goBack);
+}
+
+function goBack(){
+    allKanaEl.style.display = 'none';
+    showAllButton.textContent = 'Alle Katakana anzeigen';
+    document.getElementById('card').style.display='';
+    nextButton.style.display='';
+    progressEl.style.display='';
 }
 
 let showingAll = false;
@@ -88,23 +109,23 @@ showAllButton.addEventListener('click', () => {
     showingAll = !showingAll;
     if(showingAll){
         renderAllKana();
-        allKanaEl.style.display = 'block';
+        allKanaEl.style.display = 'flex';
+        allKanaEl.style.flexDirection = 'column';
+        allKanaEl.style.alignItems = 'center';
+        allKanaEl.style.gap = '20px';
         showAllButton.textContent = 'Verbergen';
         document.getElementById('card').style.display='none';
         nextButton.style.display='none';
         progressEl.style.display='none';
     } else {
-        allKanaEl.style.display = 'none';
-        showAllButton.textContent = 'Alle Katakana anzeigen';
-        document.getElementById('card').style.display='';
-        nextButton.style.display='';
-        progressEl.style.display='';
+        goBack();
     }
 });
 
 document.body.addEventListener("click",function(e){
 
     if(e.target===nextButton) return;
+    if(e.target===backButton) return;
 
     if(current){
         romajiEl.textContent=current[1];

@@ -53,3 +53,14 @@ button:active{
     color:#999;
     font-size:20px;
 }
+
+#allKana{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-rows:minmax(80px, auto);
+    direction:rtl;
+    gap:10px;
+    padding:20px;
+    background:#1a1a1a;
+    border-radius:14px;
+}

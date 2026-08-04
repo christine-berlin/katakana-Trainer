@@ -58,36 +58,51 @@ function renderAllKana(){
 
     const grid = document.createElement('div');
     grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = 'repeat(5, 80px)';
-    grid.style.gridAutoFlow = 'column dense';
+    grid.style.gridTemplateColumns = 'repeat(9, 80px)';
+    grid.style.gridAutoFlow = 'row';
     grid.style.direction = 'rtl';
     grid.style.gap = '10px';
 
-    katakana.forEach(k => {
-        const card = document.createElement('div');
-        card.className = 'kana-card';
-        card.style.border = '1px solid #444';
-        card.style.padding = '8px';
-        card.style.textAlign = 'center';
-        card.style.borderRadius = '4px';
-        card.style.background = '#222';
+    // Group katakana by consonant (each group has 5 items: a, i, u, e, o)
+    const groups = [];
+    const groupSize = 5;
+    
+    for (let i = 0; i < katakana.length; i += groupSize) {
+        groups.push(katakana.slice(i, i + groupSize));
+    }
 
-        const kEl = document.createElement('div');
-        kEl.className = 'kana-char';
-        kEl.textContent = k[0];
-        kEl.style.fontSize = '24px';
-        kEl.style.fontWeight = 'bold';
+    // Reverse groups for RTL display
+    groups.reverse();
 
-        const rEl = document.createElement('div');
-        rEl.className = 'kana-romaji';
-        rEl.textContent = k[1];
-        rEl.style.fontSize = '12px';
-        rEl.style.color = '#999';
-        rEl.style.marginTop = '4px';
+    // Flatten groups back and add to grid
+    groups.forEach(group => {
+        // Reverse each group for top-to-bottom display in RTL
+        group.reverse().forEach(k => {
+            const card = document.createElement('div');
+            card.className = 'kana-card';
+            card.style.border = '1px solid #444';
+            card.style.padding = '8px';
+            card.style.textAlign = 'center';
+            card.style.borderRadius = '4px';
+            card.style.background = '#222';
 
-        card.appendChild(kEl);
-        card.appendChild(rEl);
-        grid.appendChild(card);
+            const kEl = document.createElement('div');
+            kEl.className = 'kana-char';
+            kEl.textContent = k[0];
+            kEl.style.fontSize = '24px';
+            kEl.style.fontWeight = 'bold';
+
+            const rEl = document.createElement('div');
+            rEl.className = 'kana-romaji';
+            rEl.textContent = k[1];
+            rEl.style.fontSize = '12px';
+            rEl.style.color = '#999';
+            rEl.style.marginTop = '4px';
+
+            card.appendChild(kEl);
+            card.appendChild(rEl);
+            grid.appendChild(card);
+        });
     });
 
     allKanaEl.appendChild(grid);

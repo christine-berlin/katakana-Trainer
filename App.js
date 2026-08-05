@@ -68,7 +68,7 @@ function nextKana(){
 
 function renderAllKana(){
     // Clear previous
-    allKanaEl.innerHTML = '<button id="backButton">Zurück</button>';
+    allKanaEl.innerHTML = '<button id="backButton">Go Back</button>';
 
     const grid = document.createElement('div');
     grid.style.display = 'grid';
